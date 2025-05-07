@@ -19,7 +19,7 @@ for file_index, file_name in enumerate(excel_files):
 
     file_post_id_mapping = {}
 
-    # Step 1: Build post-id mapping
+    # Step 1: Build post-id mappi
     for sheet_name, sheet in sheets.items():
         if sheet_name.lower() == 'events':
             continue
@@ -41,13 +41,13 @@ for file_index, file_name in enumerate(excel_files):
 
         # Map post-id
         if sheet_name_clean != 'events':
-            for col in sheet.columns:
-                if sheet[col].dtype == 'object' or pd.api.types.is_numeric_dtype(sheet[col]):
-                    sheet[col] = sheet[col].apply(
-                        lambda x: file_post_id_mapping.get(int(x), x)
-                        if pd.notnull(x) and str(x).isdigit() and int(x) in file_post_id_mapping
-                        else x
-                    )
+            id_columns = [col for col in sheet.columns if 'post-id' in col.lower()]
+            for col in id_columns:
+                sheet[col] = sheet[col].apply(
+                    lambda x: file_post_id_mapping.get(int(x), x)
+                    if pd.notnull(x) and str(x).isdigit() and int(x) in file_post_id_mapping
+                    else x
+                )
 
         # Add label columns
         if sheet_name_clean == 'post features':
