@@ -51,7 +51,7 @@ for file_index, file_name in enumerate(excel_files):
 
         # Add label columns
         if sheet_name_clean == 'post features':
-            for col in ['annotatorOne_post_label', 'annotatorTwo_post_label', 'annotatorThree_post_label']:
+            for col in ['annotatorOne_post_label', 'annotatorTwo_post_label', 'annotatorThree_post_label', 'final_label']:
                 if col not in sheet.columns:
                     sheet[col] = None
 
@@ -60,7 +60,7 @@ for file_index, file_name in enumerate(excel_files):
             sheet['comment_id'] = list(range(next_comment_id, next_comment_id + len(sheet)))
             next_comment_id += len(sheet)
 
-            for col in ['annotatorOne_comment_label', 'annotatorTwo_comment_label', 'annotatorThree_comment_label', 'label']:
+            for col in ['annotatorOne_comment_label', 'annotatorTwo_comment_label', 'annotatorThree_comment_label', 'final_label']:
                 if col not in sheet.columns:
                     sheet[col] = None
 
